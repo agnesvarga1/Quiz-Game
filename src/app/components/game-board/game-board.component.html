@@ -1,0 +1,20 @@
+<div class="mx-auto text-center">
+  <div class="card" style="width: 18rem">
+    <div class="card-body">
+      <h5 class="card-title fs-6">
+        {{ currentQuestion?.category }}
+      </h5>
+      <p class="card-text fs-6">
+        {{ currentQuestion?.question }}
+      </p>
+    </div>
+    <div class="p-2">
+      <p
+        *ngFor="let a of currentQuestionAnswers"
+        class="border boreder-secondary rounded-pill option pointer"
+      >
+        {{ a }}
+      </p>
+    </div>
+  </div>
+</div>

@@ -2,19 +2,29 @@
   <div class="card" style="width: 18rem">
     <div class="card-body">
       <h5 class="card-title fs-6">
-        {{ currentQuestion?.category }}
+        {{ currentQuestion?.category | decodePipe }}
       </h5>
       <p class="card-text fs-6">
-        {{ currentQuestion?.question }}
+        {{ currentQuestion?.question | decodePipe }}
       </p>
     </div>
     <div class="p-2">
-      <p
-        *ngFor="let a of currentQuestionAnswers"
-        class="border boreder-secondary rounded-pill option pointer"
+      <div
+        *ngFor="let a of currAnswers(); let i = index"
+        class="border border-secondary rounded-pill option pointer my-2"
+        [ngClass]="{
+          'bg-success text-light':
+            isCorrect() && selectedAnswerIndex === i && isCorrect() !== null,
+          'bg-danger text-light':
+            !isCorrect() && selectedAnswerIndex === i && isCorrect() !== null
+        }"
+        [ngClass]="
+          !isCorrect() && a === correctAnswer ? 'bg-success text-light' : ''
+        "
+        (click)="clickOnAnswer(a, i)"
       >
-        {{ a }}
-      </p>
+        {{ a | decodePipe }}
+      </div>
     </div>
   </div>
 </div>

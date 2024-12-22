@@ -4,14 +4,17 @@ import { QiuzService } from '../../services/qiuz.service';
 import { catchError } from 'rxjs';
 import { NgClass, NgFor } from '@angular/common';
 import { DecodePipePipe } from '../../pipes/decode-pipe.pipe';
+import { EndGameModalComponent } from '../end-game-modal/end-game-modal.component';
+import { ScoreService } from '../../services/score.service';
 @Component({
   selector: 'app-game-board',
   standalone: true,
-  imports: [NgFor, NgClass, DecodePipePipe],
+  imports: [NgFor, NgClass, DecodePipePipe, EndGameModalComponent],
   templateUrl: './game-board.component.html',
   styleUrl: './game-board.component.scss',
 })
 export class GameBoardComponent {
+  constructor(private scoreService: ScoreService) {}
   quizService = inject(QiuzService);
   questions = signal<Array<QuizResult>>([]);
   currentIndex = signal<number>(0);
@@ -21,6 +24,7 @@ export class GameBoardComponent {
   count: number = 0;
   inCorrectAnswer = signal<boolean | null>(null);
   correctAnswer: string = '';
+  isGameOver: boolean = false;
   ngOnInit(): void {
     this.quizService
       .getQuestionFromApi()
@@ -65,19 +69,23 @@ export class GameBoardComponent {
 
     if (this.isCorrect() === true) {
       this.count = this.count + 1;
-      console.log('Players scores: ' + this.count);
+      this.scoreService.setScore(this.count);
+      // console.log('Players scores: ' + this.count);
     } else if (
       this.isCorrect() === false &&
       this.currentQuestion?.correct_answer
     ) {
       this.correctAnswer = this.currentQuestion.correct_answer;
     }
-    if (this.currentIndex() <= this.questions().length) {
+    if (this.currentIndex() < this.questions().length - 1) {
       setTimeout(() => {
         this.nextquestion();
       }, 3000);
     } else {
-      console.log('Game over');
+      setTimeout(() => {
+        this.isGameOver = true;
+        console.log('Game over');
+      }, 3000);
     }
   }
 

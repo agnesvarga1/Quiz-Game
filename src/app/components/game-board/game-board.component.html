@@ -1,4 +1,4 @@
-<div class="mx-auto text-center">
+<div class="mx-auto text-center relative">
   <div class="card" style="width: 18rem">
     <div class="card-body">
       <h5 class="card-title fs-6">
@@ -13,7 +13,7 @@
         *ngFor="let a of currAnswers(); let i = index"
         class="border border-secondary rounded-pill option pointer my-2"
         [ngClass]="{
-          'bg-success text-light':
+          'bg-success text-white':
             isCorrect() && selectedAnswerIndex === i && isCorrect() !== null,
           'bg-danger text-light':
             !isCorrect() && selectedAnswerIndex === i && isCorrect() !== null
@@ -27,4 +27,7 @@
       </div>
     </div>
   </div>
+  @if(isGameOver){
+  <app-end-game-modal [score]="count"></app-end-game-modal>
+  }
 </div>

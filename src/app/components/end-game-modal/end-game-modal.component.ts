@@ -9,4 +9,8 @@ import { Component, Input } from '@angular/core';
 })
 export class EndGameModalComponent {
   @Input() score: number | null = null;
+
+  playAgain() {
+    window.location.reload();
+  }
 }

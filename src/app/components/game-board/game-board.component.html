@@ -1,6 +1,7 @@
 <div class="mx-auto text-center relative">
   <div class="card" style="width: 18rem">
     <div class="card-body">
+      <h3>{{ currentIndex() + 1 }}/{{ questions().length }}</h3>
       <h5 class="card-title fs-6">
         {{ currentQuestion?.category | decodePipe }}
       </h5>

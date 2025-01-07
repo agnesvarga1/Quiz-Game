@@ -1,7 +1,11 @@
 <app-header></app-header>
 <main class="container">
+  @if(isStarted){
   <app-game-header></app-game-header>
   <div class="d-flex justify-content-center mt-2">
     <app-game-board></app-game-board>
   </div>
+  }@else{
+  <app-start-game></app-start-game>
+  }
 </main>

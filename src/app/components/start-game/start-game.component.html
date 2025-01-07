@@ -1,0 +1,32 @@
+<div class="mx-auto text-center">
+  <h1>Customize options</h1>
+  <form class="mx-auto" action="" style="width: 18rem">
+    <label class="mb-1" for="selectDifficulty">Select Difficulty </label>
+    <select
+      id="selectDifficulty"
+      class="form-select mb-3"
+      aria-label="Default select example"
+      [(ngModel)]="selectedDifficulty"
+      name="difficulty"
+    >
+      <option value="any" selected>Any Difficulty</option>
+      <option value="easy">Easy</option>
+      <option value="medium">Medium</option>
+      <option value="hard">Hard</option>
+    </select>
+    <label class="mb-1" for="selectCategory">Select Category </label>
+    <select
+      id="selectCategory"
+      class="form-select mb-3"
+      aria-label="Default select example"
+      [(ngModel)]="selectedCategory"
+      name="category"
+    >
+      <option value="any" selected>Any Category</option>
+      <option *ngFor="let category of categories()" [value]="category.id">
+        {{ category.name }}
+      </option>
+    </select>
+    <button type="submit" class="btn btn-primary w-100 fs-4">Let's Play</button>
+  </form>
+</div>

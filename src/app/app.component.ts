@@ -32,7 +32,6 @@ export class AppComponent {
     start: boolean;
   }) {
     this.gameConfig = event;
-    console.log('Game configuration:', this.gameConfig);
     this.isStarted = this.gameConfig.start;
   }
 }

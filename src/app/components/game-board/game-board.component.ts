@@ -39,7 +39,7 @@ export class GameBoardComponent {
       )
       .subscribe((res) => {
         this.questions.set(res.results);
-        console.log(this.questions());
+        //console.log(this.questions());
         this.loadCurrentQuestionAnswers();
       });
   }
@@ -73,7 +73,6 @@ export class GameBoardComponent {
     if (this.isCorrect() === true) {
       this.count = this.count + 1;
       this.scoreService.setScore(this.count);
-      // console.log('Players scores: ' + this.count);
     } else if (
       this.isCorrect() === false &&
       this.currentQuestion?.correct_answer
@@ -87,8 +86,7 @@ export class GameBoardComponent {
     } else {
       setTimeout(() => {
         this.isGameOver = true;
-        console.log('Game over');
-      }, 3000);
+      }, 2500);
     }
   }
 

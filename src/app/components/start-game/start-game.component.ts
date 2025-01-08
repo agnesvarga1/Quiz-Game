@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, EventEmitter, inject, Output, signal } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { CategoryService } from '../../services/category.service';
 import { TriviaCategory } from '../../model/category.model';
@@ -14,8 +14,14 @@ import { FormsModule } from '@angular/forms';
 export class StartGameComponent {
   catService = inject(CategoryService);
   categories = signal<Array<TriviaCategory>>([]);
-  selectedCategory: string = 'any';
-  selectedDifficulty: string = 'any';
+  selectedCategory: string = '';
+  selectedDifficulty: string = '';
+  start: boolean = false;
+  @Output() submitEvent = new EventEmitter<{
+    category: string;
+    difficulty: string;
+    start: boolean;
+  }>();
   ngOnInit(): void {
     this.catService
       .getCategories()
@@ -27,7 +33,14 @@ export class StartGameComponent {
       )
       .subscribe((res) => {
         this.categories.set(res.trivia_categories);
-        //console.log(this.categories());
       });
+  }
+  onSubmit() {
+    this.start = true;
+    this.submitEvent.emit({
+      category: this.selectedCategory,
+      difficulty: this.selectedDifficulty,
+      start: this.start,
+    });
   }
 }

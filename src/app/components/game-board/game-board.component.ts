@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, Input, signal } from '@angular/core';
 import { QuizResult } from '../../model/quiz.model';
 import { QiuzService } from '../../services/qiuz.service';
 import { catchError } from 'rxjs';
@@ -25,9 +25,12 @@ export class GameBoardComponent {
   inCorrectAnswer = signal<boolean | null>(null);
   correctAnswer: string = '';
   isGameOver: boolean = false;
+  @Input() category!: string;
+  @Input() difficulty!: string;
+
   ngOnInit(): void {
     this.quizService
-      .getQuestionFromApi()
+      .getQuestionFromApi(this.difficulty, this.category)
       .pipe(
         catchError((err) => {
           console.log(err);

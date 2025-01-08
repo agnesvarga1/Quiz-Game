@@ -1,6 +1,6 @@
 <div class="mx-auto text-center">
   <h1>Customize options</h1>
-  <form class="mx-auto" action="" style="width: 18rem">
+  <form class="mx-auto" action="" style="width: 18rem" (ngSubmit)="onSubmit()">
     <label class="mb-1" for="selectDifficulty">Select Difficulty </label>
     <select
       id="selectDifficulty"
@@ -9,7 +9,7 @@
       [(ngModel)]="selectedDifficulty"
       name="difficulty"
     >
-      <option value="any" selected>Any Difficulty</option>
+      <option value="" selected>Any Difficulty</option>
       <option value="easy">Easy</option>
       <option value="medium">Medium</option>
       <option value="hard">Hard</option>
@@ -22,7 +22,7 @@
       [(ngModel)]="selectedCategory"
       name="category"
     >
-      <option value="any" selected>Any Category</option>
+      <option value="" selected>Any Category</option>
       <option *ngFor="let category of categories()" [value]="category.id">
         {{ category.name }}
       </option>

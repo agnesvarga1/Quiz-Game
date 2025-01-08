@@ -3,9 +3,13 @@
   @if(isStarted){
   <app-game-header></app-game-header>
   <div class="d-flex justify-content-center mt-2">
-    <app-game-board></app-game-board>
+    <app-game-board
+      [category]="gameConfig.category"
+      [difficulty]="gameConfig.difficulty"
+    ></app-game-board>
   </div>
   }@else{
-  <app-start-game></app-start-game>
+  <app-start-game (submitEvent)="handleStartGame($event)"></app-start-game>
+
   }
 </main>

@@ -25,6 +25,7 @@ export class GameBoardComponent {
   inCorrectAnswer = signal<boolean | null>(null);
   correctAnswer: string = '';
   isGameOver: boolean = false;
+
   @Input() category!: string;
   @Input() difficulty!: string;
 
@@ -39,7 +40,7 @@ export class GameBoardComponent {
       )
       .subscribe((res) => {
         this.questions.set(res.results);
-        //console.log(this.questions());
+
         this.loadCurrentQuestionAnswers();
       });
   }

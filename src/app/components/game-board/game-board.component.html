@@ -2,10 +2,21 @@
   <div class="card" style="width: 18rem">
     <div class="card-body">
       <h3>{{ currentIndex() + 1 }}/{{ questions().length }}</h3>
-      <h5 class="card-title fs-6">
+      <h5 class="card-title fs-5">
         {{ currentQuestion?.category | decodePipe }}
       </h5>
-      <p class="card-text fs-6">
+
+      <h6
+        class="text-uppercase fs-6 my-1"
+        [ngClass]="{
+          'text-success': currentQuestion?.difficulty === 'easy',
+          'text-warning': currentQuestion?.difficulty === 'medium',
+          'text-danger': currentQuestion?.difficulty === 'hard'
+        }"
+      >
+        {{ currentQuestion?.difficulty }}
+      </h6>
+      <p class="card-text fs-5">
         {{ currentQuestion?.question | decodePipe }}
       </p>
     </div>
